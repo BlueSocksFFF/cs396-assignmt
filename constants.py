@@ -1,8 +1,8 @@
 steps_num = 10000
 
-numberOfGenerations = 1
+numberOfGenerations = 10
 
-populationSize = 1
+populationSize = 10
 
 numSensorNeurons = 3
 
