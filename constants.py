@@ -4,4 +4,4 @@ numberOfGenerations = 1
 
 populationSize = 1
 
-motorJointRange = 0.1
+motorJointRange = 0.6

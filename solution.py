@@ -64,15 +64,14 @@ class SOLUTION:
         self.numLinks = random.randint(1, 9)
         # numLinks + 1 = Total number of Link
         # numLinks = number of joints
-        self.numSensors = random.randint(0, self.numLinks+1)
-        if self.numSensors > 0:
-            linkList = range(self.numLinks+1)
-            self.sensorList = random.sample(linkList, self.numSensors)
+        self.numSensors = random.randint(1, self.numLinks+1)
+        linkList = range(self.numLinks+1)
+        self.sensorList = random.sample(linkList, self.numSensors)
         pyrosim.Start_URDF("body.urdf")
         if 0 in self.sensorList:
-            pyrosim.Send_Cube(name="Start", pos=[0,0,0], size=[1, 1, 1], color='Blue')
+            pyrosim.Send_Cube(name="Start", pos=[0,0,0], size=[1, 1, 1], color='Green')
         else:
-            pyrosim.Send_Cube(name="Start", pos=[0,0,0], size=[1, 1, 1])
+            pyrosim.Send_Cube(name="Start", pos=[0,0,0], size=[1, 1, 1], color= "Blue")
         pyrosim.Send_Joint(name = "Start_Link0", parent="Start", child="Link0", type="revolute", position=[0.5, 0, 0], jointAxis= "1 0 0")
         for i in range(self.numLinks):
             x_l = random.uniform(0.2, 2)
@@ -80,12 +79,12 @@ class SOLUTION:
             z_l = random.uniform(0.2, 2)
             pname = "Link"+str(i)
             if i+1 in self.sensorList:
-                pyrosim.Send_Cube(name = pname, pos = [x_l/2, y_l/2, z_l/2], size = [x_l, y_l, z_l], color='Blue')
+                pyrosim.Send_Cube(name = pname, pos = [x_l/2,0,0], size = [x_l, y_l, z_l], color= "Green")
             else:
-                pyrosim.Send_Cube(pname, pos = [x_l/2, y_l/2, z_l/2], size = [x_l, y_l, z_l])
+                pyrosim.Send_Cube(pname, pos = [x_l/2,0,0], size = [x_l, y_l, z_l], color="Blue")
             if i < self.numLinks -1:
                 cname = "Link"+str(i+1)
-                pyrosim.Send_Joint(name = pname+"_"+cname, parent= pname, child = cname, type="revolute", position=[x_l/2, y_l/2, z_l/2], jointAxis= "1 0 0")
+                pyrosim.Send_Joint(name = pname+"_"+cname, parent= pname, child = cname, type="revolute", position=[x_l, 0, 0], jointAxis= "1 0 0")
         pyrosim.End()
 
     def Generate_Brain(self):
