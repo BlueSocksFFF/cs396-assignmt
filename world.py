@@ -7,6 +7,7 @@ class WORLD:
             self.physicsClient = p.connect(p.DIRECT)
         elif directOrGUI == 'GUI':
             self.physicsClient = p.connect(p.GUI)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
         else:
             print('Error: Wrong input. Please write DIRECT or GUI')
             exit()
