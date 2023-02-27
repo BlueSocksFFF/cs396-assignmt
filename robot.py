@@ -50,12 +50,10 @@ class ROBOT:
 
     def Get_Fitness(self):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
-        basePosition = basePositionAndOrientation[0]
-        yPosition = basePosition[1]
-        zPosition = basePosition[2]
-        if zPosition < 1:
-            self.fell_on_ground = True
+        xPosition = basePositionAndOrientation[0]
+        # yPosition = basePosition[1]
+        # zPosition = basePosition[2]
         f = open("tmp"+str(self.solutionID)+".txt","w")
-        f.write(str(yPosition)+"\n"+str(self.fell_on_ground))
+        f.write(str(xPosition))
         f.close()
         os.rename("tmp"+str(self.solutionID)+".txt", "fitness"+str(self.solutionID)+".txt")
