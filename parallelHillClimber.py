@@ -8,11 +8,13 @@ import random
 class PARALLEL_HILL_CLIMBER:
     def __init__(self) -> None:
         os.system("del brain*.nndf")
+        os.system("del body*.urdf")
         os.system("del fitness*.txt")
         self.nextAvailableID = 0
         self.parents = {}
         self.fits = {}
         for i in range(c.populationSize):
+            # print(i)
             random.seed(i)
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
@@ -75,12 +77,17 @@ class PARALLEL_HILL_CLIMBER:
         best_fitness = 0
         best_parent = 0
         for i in self.parents.keys():
-            if self.parents[i].fitness > best_fitness:
-                best_fitness = self.parents[i].fitness
+            fit = self.parents[i].fitness
+            if fit > best_fitness:
+                best_fitness = fit
                 best_parent = i
-                plt.plot(range(1, c.numberOfGenerations+1), self.fits[i])
-                plt.xlabel('Generations')
-                plt.ylabel('Fitness')
-                plt.title('Best Fitness:{fitness}'.format(best_fitness))
-            self.parents[best_parent].start_simulation_after_mutation('GUI')
+            plt.figure()
+            plt.plot(range(1, c.numberOfGenerations+1), self.fits.get(i))
+            # print(self.fits.get(i))
+            plt.xlabel('Generations')
+            plt.ylabel('Fitness')
+            plt.title('Best Fitness:{}'.format(best_fitness))
+            # plt.show()
+            plt.savefig('population'+str(i)+'.png')
+        self.parents[best_parent].start_simulation_after_mutation('GUI')
         return 0

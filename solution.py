@@ -6,6 +6,7 @@ import time
 
 class SOLUTION:
     def __init__(self, id) -> None:
+        # print(id)
         self.myID = id
 
     def Set_ID(self, id):
@@ -29,8 +30,7 @@ class SOLUTION:
         f = open("fitness"+str(self.myID)+".txt","r")
         lines = f.readlines()
         self.fitness = float(lines[0])
-        str_bool = lines[1]
-        print(self.fitness)
+        # print(self.fitness)
         f.close()
         os.system("del fitness"+str(self.myID)+".txt")
 
@@ -43,49 +43,56 @@ class SOLUTION:
         # Indices
         self.links = {}
         self.joints = {}
-        self.numLinks = random.randint(1, 10)
+        self.numLinks = random.randint(2, 10)
         self.numSensors = random.randint(1, self.numLinks)
         print(self.numLinks)
         linkList = range(self.numLinks)
         self.sensorList = random.sample(linkList, self.numSensors)
+        print(self.numSensors, self.sensorList)
         self.link_names = []
         self.joint_names = []
-        direc_avail = ['xp','xm','yp','ym','zp','zm']
+        self.direc_avail = ['xp','xm','yp','ym','zp','zm']
         # xplus, xminus, yplus, yminus, zplus, zminus
         self.dict_linkname_direc_avail = {}
         self.dict_linkname_size = {}
         self.dict_link_jointloc_buffer = {}
+        self.link_name_index = {}
         pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
         if 0 in self.sensorList:
             pyrosim.Send_Cube(name="Start", pos=[0,0,0], size=[1, 1, 1], color='Green')
             self.links.update({0:{'name':'Start', 'pos':[0,0,0], 'size':[1,1,1], 'color':'Green'}})
+            self.link_name_index.update({"Start":0})
         else:
             pyrosim.Send_Cube(name="Start", pos=[0,0,0], size=[1, 1, 1], color= "Blue")
             self.links.update({0:{'name':'Start', 'pos':[0,0,0], 'size':[1,1,1], 'color':'Blue'}})
+            self.link_name_index.update({"Start":0})
         self.link_names.append("Start")
-        self.dict_linkname_direc_avail.update({"Start":direc_avail.copy()})
+        self.dict_linkname_direc_avail.update({"Start":self.direc_avail.copy()})
         self.dict_linkname_size.update({"Start":[1,1,1]})
         self.dict_link_jointloc_buffer.update({"Start":[0,0,0]})
-        for i in range(self.numLinks-1):
+        self.link_joint_ind = {}
+        for i in range(1, self.numLinks):
             x_l = random.uniform(0.2, 2)
             y_l = random.uniform(0.2, 2)
             z_l = random.uniform(0.2, 2)
-            name_link_attached = random.choice(self.link_names)
+            linkname = "Link"+str(i)
+            avail_linknames_to_join = self.link_names.copy()
+            # avail_linknames_to_join.remove(linkname)
+            name_link_attached = random.choice(avail_linknames_to_join)
             pj = self.dict_link_jointloc_buffer.get(name_link_attached)
             direcs_a = self.dict_linkname_direc_avail.get(name_link_attached)
             while(direcs_a == []):
-                self.link_names.remove(name_link_attached)
-                name_link_attached = random.choice(self.link_names)
+                avail_linknames_to_join.remove(name_link_attached)
+                name_link_attached = random.choice(avail_linknames_to_join)
                 direcs_a = self.dict_linkname_direc_avail.get(name_link_attached)
             direc = random.choice(direcs_a)
             direcs_a.remove(direc)
             self.dict_linkname_direc_avail.update({name_link_attached:direcs_a})
             x, y, z = self.dict_linkname_size.get(name_link_attached)
-            linkname = "Link"+str(i)
             self.link_names.append(linkname)
             joint_po = pj.copy()
-            dcopy = direc_avail.copy()
-            print(name_link_attached, direc, linkname)
+            dcopy = self.direc_avail.copy()
+            # print(name_link_attached, direc, linkname)
             match direc:
                 case 'xp':
                     joint_po[0] = pj[0]+x/2
@@ -123,46 +130,57 @@ class SOLUTION:
                     pj = [0, 0, -z_l/2]
                     a = "0 0 1"
                     dcopy.remove('zp')
-            if i+1 in self.sensorList:
+            if i in self.sensorList:
                 c = 'Green'
             else:
                 c = 'Blue'
             jname = name_link_attached+"_"+linkname
             self.joint_names.append(jname)
+            pyrosim.Send_Cube(name = linkname, pos = p, size = [x_l, y_l, z_l], color= c)
+            self.links.update({i:{'name':linkname, 'pos':p, 'size':[x_l, y_l, z_l], 'color':c}})     
+            self.link_name_index.update({linkname:i})
             pyrosim.Send_Joint(name = jname, parent= name_link_attached, child = linkname, type="revolute", position=joint_po, jointAxis= a)
-            self.joints.update({i:{'name':jname, 'parent':name_link_attached, 'child':linkname, 'type':"revolute", 'position':joint_po, 'jointAxis':a}})
-            pyrosim.Send_Cube(name = linkname, pos = p, size = [x_l, y_l, z_l], color= c) 
-            self.links.update({i+1:{'name':linkname, 'pos':p, 'size':[x_l, y_l, z_l], 'color':c}})     
+            self.joints.update({i-1:{'name':jname, 'parent':name_link_attached, 'child':linkname, 'type':"revolute", 'position':joint_po, 'jointAxis':a}})
+            self.link_joint_ind.update({i-1:(self.link_names.index(name_link_attached), self.link_names.index(linkname))})
             self.dict_linkname_direc_avail.update({linkname:dcopy})
             self.dict_linkname_size.update({linkname:[x_l, y_l, z_l]})
             self.dict_link_jointloc_buffer.update({linkname:pj})
         pyrosim.End()
 
     def generate_body_after_mutation(self):
+        # print(self.numLinks, self.numSensors)
+        # print(self.links)
+        # print(self.joints)
         pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
-        for i in range(self.numLinks):
-            link_dict = self.links[i]
+        for i in self.links.keys():
+            link_dict = self.links.get(i)
+            # print(link_dict)
             pyrosim.Send_Cube(name=link_dict['name'], pos=link_dict['pos'], size=link_dict['size'], color=link_dict['color'])
-            if i < self.numLinks-1:
-                joint_dict = self.joints[i]
-                pyrosim.Send_Joint(name=joint_dict['name'], parent=joint_dict['parent'], child=joint_dict['child'], type=joint_dict['type'], position=joint_dict['position'], jointAxis=joint_dict['jointAxis'])
+        for i in self.joints.keys():
+            joint_dict = self.joints[i]
+            pyrosim.Send_Joint(name=joint_dict['name'], parent=joint_dict['parent'], child=joint_dict['child'], type=joint_dict['type'], position=joint_dict['position'], jointAxis=joint_dict['jointAxis'])
         pyrosim.End()
 
     def generate_brain_after_mutation(self):
+        # print(self.sensorList)
         pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
         name = 0
+        joint_name = {}
         for i in self.sensorList:
             if i == 0:
                 pyrosim.Send_Sensor_Neuron(name = name, linkName= "Start")
                 name =  name + 1
             else:
-                pyrosim.Send_Sensor_Neuron(name = name, linkName= "Link"+str(i-1))
+                pyrosim.Send_Sensor_Neuron(name = name, linkName= "Link"+str(i))
                 name =  name + 1
-        for i in range(self.numSensors+1, self.numSensors+self.numLinks):
-            pyrosim.Send_Motor_Neuron(name=i, jointName=self.joint_names[i-self.numSensors-1])
-        for currentRow in range(self.numSensors):
-            for currentColumn in range(self.numLinks-1):
-                pyrosim.Send_Synapse( sourceNeuronName = currentRow , targetNeuronName = currentColumn+ self.numSensors, weight = self.weights[currentRow][currentColumn] )
+        for key in self.joints.keys():
+            joint_dict = self.joints.get(key)
+            pyrosim.Send_Motor_Neuron(name=name, jointName=joint_dict.get('name'))
+            joint_name.update({key:name})
+            name = name + 1
+        for currentRow in self.sensorList:
+            for currentColumn in self.joints.keys():
+                pyrosim.Send_Synapse( sourceNeuronName = currentRow , targetNeuronName = joint_name.get(currentColumn), weight = self.weights[currentRow][currentColumn] )
         pyrosim.End()
             
 
@@ -174,11 +192,11 @@ class SOLUTION:
                 pyrosim.Send_Sensor_Neuron(name = name, linkName= "Start")
                 name =  name + 1
             else:
-                pyrosim.Send_Sensor_Neuron(name = name, linkName= "Link"+str(i-1))
+                pyrosim.Send_Sensor_Neuron(name = name, linkName= "Link"+str(i))
                 name =  name + 1
-        for i in range(self.numSensors+1, self.numSensors+self.numLinks):
-            pyrosim.Send_Motor_Neuron(name=i, jointName=self.joint_names[i-self.numSensors-1])
-        self.weights = numpy.random.rand(self.numSensors, self.numLinks-1)
+        for i in range(self.numSensors, self.numSensors+self.numLinks-1):
+            pyrosim.Send_Motor_Neuron(name=i, jointName=self.joint_names[i-self.numSensors])
+        self.weights = numpy.random.rand(20, 20)
         self.weights = self.weights * 2 - 1
         for currentRow in range(self.numSensors):
             for currentColumn in range(self.numLinks-1):
@@ -187,11 +205,18 @@ class SOLUTION:
 
     def Mutate(self):
         mutation_method = random.choice(['weights','AddSensor','DeleteSensor','AddLink','DeleteLink','ChangeSize'])
+        print(mutation_method)
+        print(self.links.keys())
+        print(self.joints.keys())
+        if len(self.sensorList) != self.numSensors:
+            print("Error: number of sensors and sensor list does not match")
+            print(self.sensorList)
+            print(self.numSensors)
         match mutation_method:
             case 'weights':
                 if self.numSensors > 0:
                     randomRow = random.randint(0, self.numSensors - 1)
-                randomColumn = random.randint(0, self.numLinks - 2)
+                randomColumn = random.randint(0, self.numLinks - 1)
                 self.weights[randomRow,randomColumn] = random.random() * 2 - 1
             case 'AddSensor':
                 if self.numSensors == self.numLinks:
@@ -217,26 +242,41 @@ class SOLUTION:
                     self.numSensors -= 1
                     link = random.choice(self.sensorList)
                     self.sensorList.remove(link)
+                    link_dict = self.links.get(link).copy()
+                    link_dict.update({'color':'Blue'})
+                    self.links.update({link:link_dict})
             case 'AddLink':
+                if self.numLinks > 9:
+                    self.Mutate()
+                i = list(self.links.keys())[-1]+1
+                j = list(self.joints.keys())[-1]+1
+                if (i-1)!=j:
+                    print("Error: link and joint indices do not match")
                 x_l = random.uniform(0.2, 2)
                 y_l = random.uniform(0.2, 2)
                 z_l = random.uniform(0.2, 2)
-                name_link_attached = random.choice(self.link_names)
+                linkname = "Link"+str(i)
+                availLinknametoJoin = self.link_names.copy()
+                self.link_name_index = {}
+                # availLinknametoJoin.remove(linkname)
+                name_link_attached = random.choice(availLinknametoJoin)
                 pj = self.dict_link_jointloc_buffer.get(name_link_attached)
                 direcs_a = self.dict_linkname_direc_avail.get(name_link_attached)
-                while(direcs_a == []):
-                    self.link_names.remove(name_link_attached)
-                    name_link_attached = random.choice(self.link_names)
+                while(len(direcs_a)==0):
+                    availLinknametoJoin.remove(name_link_attached)
+                    name_link_attached = random.choice(availLinknametoJoin)
                     direcs_a = self.dict_linkname_direc_avail.get(name_link_attached)
                 direc = random.choice(direcs_a)
                 direcs_a.remove(direc)
                 self.dict_linkname_direc_avail.update({name_link_attached:direcs_a})
                 x, y, z = self.dict_linkname_size.get(name_link_attached)
-                linkname = "Link"+str(i)
                 self.link_names.append(linkname)
                 joint_po = pj.copy()
                 dcopy = self.direc_avail.copy()
-                print(name_link_attached, direc, linkname)
+                if name_link_attached == linkname:
+                    print(self.links)
+                    print(self.joints)
+                # print(name_link_attached, direc, linkname)
                 match direc:
                     case 'xp':
                         joint_po[0] = pj[0]+x/2
@@ -274,34 +314,54 @@ class SOLUTION:
                         pj = [0, 0, -z_l/2]
                         a = "0 0 1"
                         dcopy.remove('zp')
-                if i+1 in self.sensorList:
+                if i in self.sensorList:
                     c = 'Green'
                 else:
                     c = 'Blue'
                 jname = name_link_attached+"_"+linkname
                 self.joint_names.append(jname)
-                pyrosim.Send_Joint(name = jname, parent= name_link_attached, child = linkname, type="revolute", position=joint_po, jointAxis= a)
-                self.joints.update({i:{'name':jname, 'parent':name_link_attached, 'child':linkname, 'type':"revolute", 'position':joint_po, 'jointAxis':a}})
-                pyrosim.Send_Cube(name = linkname, pos = p, size = [x_l, y_l, z_l], color= c) 
-                self.links.update({i+1:{'name':linkname, 'pos':p, 'size':[x_l, y_l, z_l], 'color':c}})           
+                # pyrosim.Send_Cube(name = linkname, pos = p, size = [x_l, y_l, z_l], color= c)
+                self.links.update({i:{'name':linkname, 'pos':p, 'size':[x_l, y_l, z_l], 'color':c}})     
+                # pyrosim.Send_Joint(name = jname, parent= name_link_attached, child = linkname, type="revolute", position=joint_po, jointAxis= a)
+                self.joints.update({i-1:{'name':jname, 'parent':name_link_attached, 'child':linkname, 'type':"revolute", 'position':joint_po, 'jointAxis':a}})
+                self.link_joint_ind.update({i-1:(self.link_name_index.get(name_link_attached), i)})
                 self.dict_linkname_direc_avail.update({linkname:dcopy})
                 self.dict_linkname_size.update({linkname:[x_l, y_l, z_l]})
                 self.dict_link_jointloc_buffer.update({linkname:pj})
                 self.numLinks += 1
             case 'DeleteLink':
+                parentlinks = []
                 availlinks = []
-                for linkname in self.dict_linkname_direc_avail.keys():
-                    direcs = self.dict_linkname_direc_avail.get(linkname)
-                    if len(direcs) > 4:
-                        availlinks.append((linkname, self.link_names.index(linkname)))
+                for key in self.link_joint_ind.keys():
+                    parent_ind, child_ind = self.link_joint_ind.get(key)
+                    if parent_ind not in parentlinks:
+                        parentlinks.append(parent_ind)
+                for i in self.links.keys():
+                    if i not in parentlinks:
+                        availlinks.append(i)
+                # print(availlinks)         
                 if len(availlinks) == 0:
                     print('Error: Cyclic links or Bug')
                     return
                 else:
-                    linkname, linkindex = random.choice(availlinks)
+                    linkindex = random.choice(availlinks)
+                    linkname = self.links.get(linkindex).get('name')
+                    joints_to_delete = []
+                    if linkindex in self.sensorList:
+                        self.sensorList.remove(linkindex)
+                        self.numSensors -= 1
+                    for key in self.link_joint_ind.keys():
+                        parent_ind, child_ind = self.link_joint_ind.get(key)
+                        if linkindex == child_ind:
+                            joints_to_delete.append(key)
+                    for i in joints_to_delete:
+                        self.link_joint_ind.pop(i)
+                        self.joint_names.remove(self.joints.get(i).get('name'))
+                        self.joints.pop(i)
                     self.links.pop(linkindex)
+                    self.link_names.remove(linkname)
                     self.dict_linkname_direc_avail.pop(linkname)
-                    self.dict_linkname_size(linkname)
+                    self.dict_linkname_size.pop(linkname)
                     self.numLinks -= 1
             case 'ChangeSize':
                 linkindex = random.choice(range(self.numLinks))
