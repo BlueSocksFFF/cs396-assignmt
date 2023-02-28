@@ -1,7 +1,7 @@
-steps_num = 1000
+steps_num = 10000
 
-numberOfGenerations = 1
+numberOfGenerations = 5
 
-populationSize = 1
+populationSize = 5
 
 motorJointRange = 0.4
