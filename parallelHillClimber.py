@@ -6,16 +6,16 @@ import matplotlib.pyplot as plt
 import random
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self) -> None:
+    def __init__(self, seed) -> None:
         os.system("del brain*.nndf")
         os.system("del body*.urdf")
         os.system("del fitness*.txt")
         self.nextAvailableID = 0
         self.parents = {}
         self.fits = {}
+        self.seed = seed
+        random.seed(self.seed)
         for i in range(c.populationSize):
-            # print(i)
-            random.seed(i)
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
             self.fits[i] = []
@@ -81,13 +81,13 @@ class PARALLEL_HILL_CLIMBER:
             if fit > best_fitness:
                 best_fitness = fit
                 best_parent = i
-            plt.figure()
-            plt.plot(range(1, c.numberOfGenerations+1), self.fits.get(i))
-            # print(self.fits.get(i))
-            plt.xlabel('Generations')
-            plt.ylabel('Fitness')
-            plt.title('Best Fitness:{}'.format(best_fitness))
-            # plt.show()
-            plt.savefig('population'+str(i)+'.png')
-        self.parents[best_parent].start_simulation_after_mutation('GUI')
+        plt.figure()
+        plt.plot(range(1, c.numberOfGenerations+1), self.fits.get(i))
+        plt.xlabel('Generations')
+        plt.ylabel('Fitness')
+        plt.title('Best Fitness:{}'.format(best_fitness))
+        plt.savefig('population'+str(self.seed)+'.png')
+        self.parents[best_parent].best_simulation('GUI')
+        os.rename("bestbody.urdf",str(self.seed)+".urdf")
+        os.rename("bestbrain.nndf",str(self.seed)+".nndf")
         return 0

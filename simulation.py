@@ -13,12 +13,13 @@ class SIMULATION:
     def Run(self):
         for i in range(c.steps_num):
             p.stepSimulation()
+            basePos, baseOrn = p.getBasePositionAndOrientation(self.robot.robotId)
+            p.resetDebugVisualizerCamera( cameraDistance = 5, cameraYaw=75, cameraPitch=-20, cameraTargetPosition = basePos)
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act()
             if self.directOrGUI == 'GUI':
                 time.sleep(1/120)
-            # print(i)
         self.Get_Fitness()
 
     def Get_Fitness(self):
