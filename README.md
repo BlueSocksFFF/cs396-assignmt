@@ -45,7 +45,7 @@ Similarly, this would be removing a piece of skin.
 Adding a link is part of the way to change the morphology - how the robot looks. This is a big change and usually results in big bumps or drops in the robot's fitness.  
 5. Remove a link  
 Removing a link is very similar to adding a link.  
-6. Change Shange
+6. Change Shange  
 Changing the shape of the link is also a way to change the morphology.  
   
 Below is a simple illustration. In this simulation, links with sensor neurons attached are colored green and links without sensor neurons attached are colored blue. All joints have motor neurons attached - meaning that all joints can move. Every sensor link is connected to every motor/joint with various weights.   
