@@ -1,8 +1,8 @@
 # Evoluation Simulation using Robots - Best Flyer
   
 ## To Run  
-To evolve: change afterEvolution in search.py to false.
-To simulate: change afterEvolution in search.py to true.
+To evolve: change afterEvolution in search.py to false.  
+To simulate: change afterEvolution in search.py to true.  
 ```
 python search.py
 ```
