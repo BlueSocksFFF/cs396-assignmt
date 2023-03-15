@@ -7,7 +7,9 @@ To simulate: change afterEvolution in search.py to true.
 python search.py
 ```
 ## Goal of the Project  
-The project aims to simulate the process of evolution. What is life and how does life forms evolve in a world? While people mainly believe in the idea of "Survival of the fitness" from Darwinism, it is hard to evolve robots in this way. With the use of computation, I can simulate how robots would evolve in a world dedicated to one single goal: To walk/crawl/swim to the furthest in limited time.  
+The project aims to simulate the process of evolution. What is life and how does life forms evolve in a world? While people mainly believe in the idea of "Survival of the fitness" from Darwinism, it is hard to evolve robots in this way. With the use of computation, I can simulate how robots would evolve in a world dedicated to one single goal: To fly to the furthest in limited time.  
+  
+For assignment, I wish to go Engineering option with 44 credits.
 
 ## Teaser
 ![population illustration](Teaser.gif)
@@ -65,7 +67,7 @@ Here are the results of the fitness development of 10 randomly seeded population
 ![population7](population6.png)
 ![population8](population7.png)
 ![population9](population8.png)
-![population10](population9.png)
+![population10](population9.png)  
 From the results, we can see that some of the populations definitely perform better than the other ones. Along the way, many of the populations are stuck for hundreds of generations and then have a big bump that boosts the fitness to the tens. However, we also have populations that take minor steps along the way. From the fitness graphs, we can see that there's definitely room for additional improvement. The population's fitness has not reached it's highest and can still improve.  
 To have better performance, one thing is to stop the generated body to bump into the sky by floor-to-body collision. I didn't have all bodies up on the ground because it would limit the variations of the bodies. I think making sure the bodies stay on the ground is an important aspect to accurately measure the fitness of the robot - especially when you are trying to measure their steps.  
 I tried to fix this issue by increasing the number of time steps of the simulation. With 1/120 seconds per step, I used 18000 steps, which is 15 seconds to make sure that the body falls back on the ground and start to measure their walking, which didn't really help. An interesting thing in morphology I found is that generally the robots have one side deep in the ground so they can control the direction they fly - I guess a good way to adopt the simulation is to see it as a way to find the best flyer.    
