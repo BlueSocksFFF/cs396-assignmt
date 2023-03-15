@@ -5,7 +5,7 @@ from parallelHillClimber import PARALLEL_HILL_CLIMBER
 afterEvolution = False
 
 if not afterEvolution:
-    for i in range(10):
+    for i in range(7,10):
         phc = PARALLEL_HILL_CLIMBER(i)
         phc.Evolve()
         phc.Show_Best()
