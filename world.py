@@ -1,4 +1,6 @@
 import pybullet_data
+import os
+import time
 import pybullet as p
 
 class WORLD:
@@ -13,6 +15,8 @@ class WORLD:
             exit()
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0, 0, -9.8)
+        while not os.path.exists("world.sdf"):
+            time.sleep(0.01)
         p.loadSDF("world.sdf")
         self.planeId = p.loadURDF("plane.urdf")
     
