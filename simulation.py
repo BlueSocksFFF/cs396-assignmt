@@ -5,10 +5,10 @@ import constants as c
 import pybullet as p
 
 class SIMULATION:
-    def __init__(self, directOrGUI, solutionID):
+    def __init__(self, directOrGUI, solutionID, afterEvolution=False):
         self.directOrGUI = directOrGUI
         self.world = WORLD(directOrGUI)
-        self.robot = ROBOT(solutionID)
+        self.robot = ROBOT(solutionID, afterEvolution)
 
     def Run(self):
         for i in range(c.steps_num):

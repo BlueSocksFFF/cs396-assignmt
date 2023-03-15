@@ -12,13 +12,12 @@ class PARALLEL_HILL_CLIMBER:
         os.system("del fitness*.txt")
         self.nextAvailableID = 0
         self.parents = {}
-        self.fits = {}
+        self.fits = []
         self.seed = seed
         random.seed(self.seed)
         for i in range(c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
-            self.fits[i] = []
 
     def Evolve(self):
         self.Evaluate(self.parents)
@@ -32,7 +31,7 @@ class PARALLEL_HILL_CLIMBER:
 
         self.EvaluateAfterMutation(self.children)
 
-        self.Print()
+        # self.Print()
 
         self.Select()
 
@@ -60,12 +59,16 @@ class PARALLEL_HILL_CLIMBER:
             solution.Wait_For_Simulation_To_End()
 
     def Select(self):
+        best_fit = 0
         for i in self.parents.keys():
             parent = self.parents[i]
             child = self.children[i]
             if parent.fitness < child.fitness:
                     self.parents[i] = self.children[i]
-            self.fits[i].append(parent.fitness)
+            parent = self.parents[i]
+            if parent.fitness > best_fit:
+                best_fit = parent.fitness    
+        self.fits.append(best_fit)
 
     def Print(self):
         print('\n')
@@ -82,7 +85,7 @@ class PARALLEL_HILL_CLIMBER:
                 best_fitness = fit
                 best_parent = i
         plt.figure()
-        plt.plot(range(1, c.numberOfGenerations+1), self.fits.get(i))
+        plt.plot(range(1, c.numberOfGenerations+1), self.fits)
         plt.xlabel('Generations')
         plt.ylabel('Fitness')
         plt.title('Best Fitness:{}'.format(best_fitness))

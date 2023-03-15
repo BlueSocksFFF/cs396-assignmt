@@ -7,12 +7,14 @@ import time
 class SOLUTION:
     def __init__(self, id) -> None:
         self.myID = id
+        self.same_world_body = True
 
     def Set_ID(self, id):
         self.myID = id
 
     def best_simulation(self, strl):
-        self.Create_World()
+        if self.same_world_body == False or self.myID == 0:
+            self.Create_World()
         self.generate_body_after_mutation()
         self.generate_brain_after_mutation()
         os.system('start /B python simulate.py '+ strl + ' ' + str(self.myID))
@@ -20,13 +22,15 @@ class SOLUTION:
         os.rename("brain"+str(self.myID)+".nndf", "bestbrain.nndf")
     
     def start_simulation_after_mutation(self, strl):
-        self.Create_World()
+        if self.same_world_body == False or self.myID == 0:
+            self.Create_World()
         self.generate_body_after_mutation()
         self.generate_brain_after_mutation()
         os.system('start /B python simulate.py '+ strl + ' ' + str(self.myID))
 
     def Start_Simulation(self, strl):
-        self.Create_World()
+        if self.same_world_body == False or self.myID == 0:
+            self.Create_World()
         self.Generate_Body()
         self.Generate_Brain()
         os.system('start /B python simulate.py '+ strl + ' ' + str(self.myID))
@@ -48,6 +52,8 @@ class SOLUTION:
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
         pyrosim.End()
+        while not os.path.exists("world.sdf"):
+            time.sleep(0.01)
 
     def Generate_Body(self):
         self.links = {}
@@ -165,6 +171,7 @@ class SOLUTION:
         pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
         name = 0
         joint_name = {}
+        sensor_name = {}
         for i in self.sensorList:
             if i not in self.links.keys():
                 print("Error when generating brain")
@@ -177,6 +184,7 @@ class SOLUTION:
             else:
                 pyrosim.Send_Sensor_Neuron(name = name, linkName= "Link"+str(i))
                 name =  name + 1
+            sensor_name.update({i:name})
         for key in self.joints.keys():
             joint_dict = self.joints.get(key)
             pyrosim.Send_Motor_Neuron(name=name, jointName=joint_dict.get('name'))
@@ -184,7 +192,7 @@ class SOLUTION:
             name = name + 1
         for currentRow in self.sensorList:
             for currentColumn in self.joints.keys():
-                pyrosim.Send_Synapse( sourceNeuronName = currentRow , targetNeuronName = joint_name.get(currentColumn), weight = self.weights[currentRow][currentColumn] )
+                pyrosim.Send_Synapse( sourceNeuronName = sensor_name.get(currentRow) , targetNeuronName = joint_name.get(currentColumn), weight = self.weights[currentRow][currentColumn] )
         pyrosim.End()
             
 
@@ -210,10 +218,10 @@ class SOLUTION:
     def Mutate(self):
         avail_mutations = ['weights','AddSensor','DeleteSensor','AddLink','DeleteLink','ChangeSize']
         mutation_method = random.choice(avail_mutations)
-        print(mutation_method)
-        print(self.numLinks)
-        print(self.links.keys())
-        print(self.joints.keys())
+        # print(mutation_method)
+        # print(self.numLinks)
+        # print(self.links.keys())
+        # print(self.joints.keys())
         if len(self.sensorList) != self.numSensors:
             print("Error: number of sensors and sensor list does not match")
             print(self.sensorList)
@@ -223,10 +231,12 @@ class SOLUTION:
             case 'weights':
                 if self.numSensors > 0:
                     randomRow = random.randint(0, self.numSensors - 1)
+                else:
+                    randomRow = 0
                 randomColumn = random.randint(0, self.numLinks - 1)
                 self.weights[randomRow,randomColumn] = random.random() * 2 - 1
             case 'AddSensor':
-                if self.numSensors == self.numLinks:
+                if self.numSensors >= self.numLinks:
                     self.Mutate()
                     return
                 elif self.numSensors < self.numLinks:
@@ -237,11 +247,14 @@ class SOLUTION:
                     link = random.choice(availlinks)
                     self.numSensors += 1
                     self.sensorList.append(link)
+                    link_dict = self.links.get(link).copy()
+                    link_dict.update({'color':'Green'})
+                    self.links.update({link:link_dict})
                 else:
                     print('Error: number of sensors cannot be greater than number of links')
                     exit()
             case 'DeleteSensor':
-                if self.numSensors == 1:
+                if self.numSensors < 3:
                     self.Mutate()
                     return
                 elif self.numSensors < 0:

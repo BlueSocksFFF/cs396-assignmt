@@ -1,4 +1,4 @@
-steps_num = 10000
+steps_num = 1800
 
 numberOfGenerations = 500
 

@@ -7,16 +7,23 @@ import os
 import constants as c
 
 class ROBOT:
-    def __init__(self, solutionID):
+    def __init__(self, solutionID, afterEvolution):
         self.solutionID = solutionID
         self.fell_on_ground = False
-        self.robotId = p.loadURDF("body"+str(self.solutionID)+".urdf")
+        if afterEvolution:
+            self.robotId = p.loadURDF(str(self.solutionID)+".urdf")
+        else:
+            self.robotId = p.loadURDF("body"+str(self.solutionID)+".urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
-        self.nn = NEURAL_NETWORK("brain"+str(self.solutionID)+".nndf")
+        if afterEvolution:
+            self.nn = NEURAL_NETWORK(str(self.solutionID)+".nndf")
+        else:
+            self.nn = NEURAL_NETWORK("brain"+str(self.solutionID)+".nndf")
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
-        os.system("del brain"+str(self.solutionID)+".nndf")
-        os.system("del body"+str(self.solutionID)+".urdf")
+        if not afterEvolution:
+            os.system("del brain"+str(self.solutionID)+".nndf")
+            os.system("del body"+str(self.solutionID)+".urdf")
 
     def Prepare_To_Sense(self):
         self.sensors = {}

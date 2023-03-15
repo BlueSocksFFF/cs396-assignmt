@@ -1,15 +1,17 @@
-# robots_simul
-## cs396 assignment 8
+# Evoluation Simulation using Robots
 
 ## To Run
 ```
 python search.py
 ```
 
-## Goal of the Design
-Use parallel running to simulate the adaption in genetics and morphologies of randomized creatures. The goal is to move positively to the x direction.
+## Goal of the Project
+The project aims to simulate the process of evolution. What is life and how does life forms evolve in a world? While people mainly believe in the idea of "Survival of the fitness" from Darwinism, it is hard to evolve robots in this way. With the use of computation, we can simulate how robots would evolve in a world dedicated to one single goal: To walk/crawl/swim to the furthest in limited time.
 
-## What I did?
+## Methods
+### Population and random seed
+
+
 
 Updated 5 ways to randomly modify and mutate:
 1. Change the weights
@@ -26,6 +28,7 @@ Updated 5 ways to randomly modify and mutate:
 ![population5](population4.png)
 
 ## Credit
+CS396 Northwestern University, Winter 2023
 r/ludobots
 Pyrosim
 Pybullet
