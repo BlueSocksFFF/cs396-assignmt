@@ -1,0 +1,520 @@
+<robot name = "robot">
+    <link name="Start">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+<<<<<<< Updated upstream:0.urdf
+                <box size="0.6346406391332584 1.0013162301904162 1.6793172844484376" />
+=======
+                <box size="1 0.44140725736477027 0.7810324315916746" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+<<<<<<< Updated upstream:0.urdf
+                <box size="0.6346406391332584 1.0013162301904162 1.6793172844484376" />
+=======
+                <box size="1 0.44140725736477027 0.7810324315916746" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link1">
+        <inertial>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0.9674546913764208 0 0" rpy="0 0 0"/>
+=======
+            <origin xyz="0 0 -0.6477489037941998" rpy="0 0 0"/>
+>>>>>>> Stashed changes:5.urdf
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0.9674546913764208 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.7746353893443885 1.2857341303304894 1.793376438743545" />
+=======
+            <origin xyz="0 0 -0.6477489037941998" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.9229826640969758 1.9423944535804498 1.2954978075883996" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0.9674546913764208 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.7746353893443885 1.2857341303304894 1.793376438743545" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link2">
+        <inertial>
+            <origin xyz="0 0.4464110313753944 0" rpy="0 0 0"/>
+=======
+            <origin xyz="0 0 -0.6477489037941998" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.9229826640969758 1.9423944535804498 1.2954978075883996" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link3">
+        <inertial>
+            <origin xyz="-0.6665106660786995 0 0" rpy="0 0 0"/>
+>>>>>>> Stashed changes:5.urdf
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0.4464110313753944 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.7957554941416414 0.8928220627507888 1.4529003016711277" />
+=======
+            <origin xyz="-0.6665106660786995 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.333021332157399 1.8043072046021371 0.8765269471150756" />
+            </geometry>
+            <material name="Blue">
+                <color rgba="0 0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.6665106660786995 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.333021332157399 1.8043072046021371 0.8765269471150756" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link5">
+        <inertial>
+            <origin xyz="0 0 0.9828825061822118" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0.9828825061822118" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.1563563527219132 0.6676843772370158 1.988787870658127" />
+            </geometry>
+            <material name="Blue">
+                <color rgba="0 0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.9828825061822118" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.1563563527219132 0.6676843772370158 1.988787870658127" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link6">
+        <inertial>
+            <origin xyz="0 -0.3872372936506454 0" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0 -0.3872372936506454 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.9478850873962668 0.7744745873012908 1.9716977235189017" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0.4464110313753944 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.7957554941416414 0.8928220627507888 1.4529003016711277" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link4">
+        <inertial>
+            <origin xyz="0.5288778928084427 0 0" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0.5288778928084427 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.0577557856168853 0.3616838501520686 1.5636870595395862" />
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.5288778928084427 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.0577557856168853 0.3616838501520686 1.5636870595395862" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link5">
+        <inertial>
+            <origin xyz="0 0 0.9307741958381591" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0.9307741958381591" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.7164284016523284 1.816711618444182 1.3904236239649548" />
+            </geometry>
+            <material name="Blue">
+                <color rgba="0 0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.9307741958381591" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.7164284016523284 1.816711618444182 1.3904236239649548" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link6">
+        <inertial>
+            <origin xyz="0.2727505104442562 0 0" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0.2727505104442562 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.5455010208885124 0.40702232059049825 1.4462291939113583" />
+            </geometry>
+            <material name="Blue">
+                <color rgba="0 0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.2727505104442562 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.5455010208885124 0.40702232059049825 1.4462291939113583" />
+=======
+            <origin xyz="0 -0.3872372936506454 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.9478850873962668 0.7744745873012908 1.9716977235189017" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link7">
+        <inertial>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 -0.9908287165980996" rpy="0 0 0"/>
+=======
+            <origin xyz="-0.22896227560372748 0 0" rpy="0 0 0"/>
+>>>>>>> Stashed changes:5.urdf
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 -0.9908287165980996" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.5782422113692858 1.653884425257418 1.9816574331961991" />
+=======
+            <origin xyz="-0.22896227560372748 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.4514447676296311 0.24279486104395093 1.052749368089012" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Blue">
+                <color rgba="0 0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 -0.9908287165980996" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.5782422113692858 1.653884425257418 1.9816574331961991" />
+=======
+            <origin xyz="-0.22896227560372748 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.4514447676296311 0.24279486104395093 1.052749368089012" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link8">
+        <inertial>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 0.9283661646640643" rpy="0 0 0"/>
+=======
+            <origin xyz="0 0 -0.7554812300756981" rpy="0 0 0"/>
+>>>>>>> Stashed changes:5.urdf
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 0.9283661646640643" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.7582461415281785 1.31966205162576 0.5765349883271609" />
+=======
+            <origin xyz="0 0 -0.7554812300756981" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.3712522578779132 0.7427585140672683 1.5109624601513962" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 0.9283661646640643" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.7582461415281785 1.31966205162576 0.5765349883271609" />
+=======
+            <origin xyz="0 0 -0.7554812300756981" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.3712522578779132 0.7427585140672683 1.5109624601513962" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link9">
+        <inertial>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0.8164005075165189 0" rpy="0 0 0"/>
+=======
+            <origin xyz="0.6458092349073796 0 0" rpy="0 0 0"/>
+>>>>>>> Stashed changes:5.urdf
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0.8164005075165189 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.38399014139984117 1.6328010150330379 0.2643645817319974" />
+=======
+            <origin xyz="0.6458092349073796 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.8953832809287672 1.5258082462733378 1.9341108360496433" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0.8164005075165189 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.38399014139984117 1.6328010150330379 0.2643645817319974" />
+=======
+            <origin xyz="0.6458092349073796 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.8953832809287672 1.5258082462733378 1.9341108360496433" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link10">
+        <inertial>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 -0.21761968622930383" rpy="0 0 0"/>
+=======
+            <origin xyz="-0.14537680815210596 0 0" rpy="0 0 0"/>
+>>>>>>> Stashed changes:5.urdf
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 -0.21761968622930383" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.6105934541197509 0.6317357071511767 0.43523937245860767" />
+=======
+            <origin xyz="-0.14537680815210596 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.2907536163042119 1.739779443350175 0.5910314894326143" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+<<<<<<< Updated upstream:0.urdf
+            <origin xyz="0 0 -0.21761968622930383" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.6105934541197509 0.6317357071511767 0.43523937245860767" />
+=======
+            <origin xyz="-0.14537680815210596 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.2907536163042119 1.739779443350175 0.5910314894326143" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Link11">
+        <inertial>
+            <origin xyz="0 -0.35385655222570833 0" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+        </inertial>
+        <visual>
+            <origin xyz="0 -0.35385655222570833 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.810677536353835 0.7077131044514167 1.8347302144888926" />
+            </geometry>
+            <material name="Green">
+                <color rgba="0 1.0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 -0.35385655222570833 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="1.810677536353835 0.7077131044514167 1.8347302144888926" />
+>>>>>>> Stashed changes:5.urdf
+            </geometry>
+        </collision>
+    </link>
+    <joint name="Start_Link1" type="revolute">
+       <parent link="Start"/>
+       <child  link="Link1"/>
+<<<<<<< Updated upstream:0.urdf
+       <origin rpy="0 0 0" xyz="0.5 0 0" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link1_Link2" type="revolute">
+       <parent link="Link1"/>
+       <child  link="Link2"/>
+       <origin rpy="0 0 0" xyz="0.9674546913764208 0.6428670651652447 0" />
+     <axis xyz="0 1 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link1_Link4" type="revolute">
+       <parent link="Link1"/>
+       <child  link="Link4"/>
+       <origin rpy="0 0 0" xyz="1.9349093827528416 0 0" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link4_Link5" type="revolute">
+       <parent link="Link4"/>
+       <child  link="Link5"/>
+       <origin rpy="0 0 0" xyz="0.5288778928084427 0 0.7818435297697931" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link5_Link6" type="revolute">
+       <parent link="Link5"/>
+       <child  link="Link6"/>
+       <origin rpy="0 0 0" xyz="0.8582142008261642 0 0.9307741958381591" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Start_Link7" type="revolute">
+       <parent link="Start"/>
+       <child  link="Link7"/>
+       <origin rpy="0 0 0" xyz="0 0 -0.5" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link5_Link8" type="revolute">
+       <parent link="Link5"/>
+       <child  link="Link8"/>
+       <origin rpy="0 0 0" xyz="0 0 1.8615483916763182" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link4_Link9" type="revolute">
+       <parent link="Link4"/>
+       <child  link="Link9"/>
+       <origin rpy="0 0 0" xyz="0.5288778928084427 0.1808419250760343 0" />
+     <axis xyz="0 1 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link4_Link10" type="revolute">
+       <parent link="Link4"/>
+       <child  link="Link10"/>
+       <origin rpy="0 0 0" xyz="0.5288778928084427 0 -0.7818435297697931" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+=======
+       <origin rpy="0 0 0" xyz="0 0 -0.5" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link1_Link3" type="revolute">
+       <parent link="Link1"/>
+       <child  link="Link3"/>
+       <origin rpy="0 0 0" xyz="-0.9614913320484879 0 -0.6477489037941998" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link3_Link5" type="revolute">
+       <parent link="Link3"/>
+       <child  link="Link5"/>
+       <origin rpy="0 0 0" xyz="-0.6665106660786995 0 0.4382634735575378" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link3_Link6" type="revolute">
+       <parent link="Link3"/>
+       <child  link="Link6"/>
+       <origin rpy="0 0 0" xyz="-0.6665106660786995 -0.9021536023010686 0" />
+     <axis xyz="0 1 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link3_Link7" type="revolute">
+       <parent link="Link3"/>
+       <child  link="Link7"/>
+       <origin rpy="0 0 0" xyz="-1.333021332157399 0 0" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link7_Link8" type="revolute">
+       <parent link="Link7"/>
+       <child  link="Link8"/>
+       <origin rpy="0 0 0" xyz="-0.22896227560372748 0 -0.6940529611670818" />
+     <axis xyz="0 0 1"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link1_Link9" type="revolute">
+       <parent link="Link1"/>
+       <child  link="Link9"/>
+       <origin rpy="0 0 0" xyz="0.9614913320484879 0 -0.6477489037941998" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Start_Link10" type="revolute">
+       <parent link="Start"/>
+       <child  link="Link10"/>
+       <origin rpy="0 0 0" xyz="-0.5 0 0" />
+     <axis xyz="1 0 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+    <joint name="Link10_Link11" type="revolute">
+       <parent link="Link10"/>
+       <child  link="Link11"/>
+       <origin rpy="0 0 0" xyz="-0.14537680815210596 -0.3108281468971928 0" />
+     <axis xyz="0 1 0"/>
+       <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
+    </joint>
+>>>>>>> Stashed changes:5.urdf
+</robot>
