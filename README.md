@@ -64,8 +64,8 @@ I tried to fix this issue by increasing the number of time steps of the simulati
 Overall, I think my simulation gets pretty good results but still have room for improvement.  
 
 ## Credit
-CS396 Northwestern University, Winter 2023
-r/ludobots
-Pyrosim
-Pybullet
-Karl Sims
+CS396 Northwestern University, Winter 2023  
+r/ludobots  
+Pyrosim  
+Pybullet  
+Karl Sims  
