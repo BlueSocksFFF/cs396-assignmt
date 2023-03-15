@@ -1,4 +1,4 @@
-# Evoluation Simulation using Robots  
+# Evoluation Simulation using Robots - Best Flyer
   
 ## To Run  
 ```
@@ -44,6 +44,7 @@ Below is a simple illustration. In this simulation, links with sensor neurons at
 
 ### Fitness  
 In this simulation, I did not do a lot of modification on fitness. Fitness is simply measured as how far the robot moves - the goal is to simulate evolution rather than try out different behaviors of the robots.  
+However, after the simulation, I figured out that a more useful way to explain is to find the best flyer or bumper.  
 ![Population](image1.jpg)
 
 ## Results  
@@ -60,7 +61,7 @@ Here are the results of the fitness development of 10 randomly seeded population
 ![population10](population9.png)
 From the results, we can see that some of the populations definitely perform better than the other ones. Along the way, many of the populations are stuck for hundreds of generations and then have a big bump that boosts the fitness to the tens. However, we also have populations that take minor steps along the way. From the fitness graphs, we can see that there's definitely room for additional improvement. The population's fitness has not reached it's highest and can still improve.  
 To have better performance, one thing is to stop the generated body to bump into the sky by floor-to-body collision. I didn't have all bodies up on the ground because it would limit the variations of the bodies. I think making sure the bodies stay on the ground is an important aspect to accurately measure the fitness of the robot - especially when you are trying to measure their steps.  
-I tried to fix this issue by increasing the number of time steps of the simulation. With 1/120 seconds per step, I used 18000 steps, which is 15 seconds to make sure that the body falls back on the ground and start to measure their walking.  
+I tried to fix this issue by increasing the number of time steps of the simulation. With 1/120 seconds per step, I used 18000 steps, which is 15 seconds to make sure that the body falls back on the ground and start to measure their walking, which didn't really help. An interesting thing in morphology I found is that generally the robots have one side deep in the ground so they can control the direction they fly - I guess a good way to adopt the simulation is to see it as a way to find the best flyer.    
 Overall, I think my simulation gets pretty good results but still have room for improvement.  
 
 ## Credit
