@@ -46,8 +46,6 @@ class SOLUTION:
         os.system("del fitness"+str(self.myID)+".txt")
 
     def Create_World(self):
-        while not os.path.exists("world.sdf"):
-            time.sleep(0.01)
         pyrosim.Start_SDF("world.sdf")
         pyrosim.End()
 
